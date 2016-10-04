@@ -2,6 +2,21 @@
 
 import argparse
 
+
+def password_generator(word, worlist, prefix=''):
+    for x in range(0, 2**len(word)):
+        new_password = prefix
+        for i in range(0, len(word)):
+            if 2**i & x == 0:
+                new_password += word[i].upper()
+            else:
+                new_password += word[i]
+        wordlist.write(new_password + "\n")
+        for i in range(0, 99):
+            wordlist.write(new_password + str(i) + "\n")
+        for i in range(2005, 2016):
+            wordlist.write(new_password + str(i) + "\n")
+
 parser = argparse.ArgumentParser(prog='pass.py',
                                  usage='%(prog)s words [OPTIONS]',
                                  description='Create custom passwords list.\
@@ -22,20 +37,6 @@ parser.add_argument('-p', '--prefix',
                     help='Prefix every password generated with one word')
 args = parser.parse_args()
 
-
-def password_generator(word, worlist, prefix=''):
-    for x in range(0, 2**len(word)):
-        new_password = prefix
-        for i in range(0, len(word)):
-            if 2**i & x == 0:
-                new_password += word[i].upper()
-            else:
-                new_password += word[i]
-        wordlist.write(new_password + "\n")
-        for i in range(0, 99):
-            wordlist.write(new_password + str(i) + "\n")
-        for i in range(2005, 2016):
-            wordlist.write(new_password + str(i) + "\n")
 
 try:
     wordlist = open(args.output, 'w')
