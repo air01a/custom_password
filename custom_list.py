@@ -10,11 +10,12 @@ def password_generator(word, worlist, prefix=''):
                 word[i] = word[i].upper()
             else:
                 word[i] = word[i].lower()
-        wordlist.write(prefix+word + "\n")
+        wordlist.write(prefix + word + "\n")
         for i in range(0, 99):
             wordlist.write(prefix + word + str(i) + "\n")
         for i in range(2005, 2016):
             wordlist.write(prefix + word + str(i) + "\n")
+            wordlist.write(prefix + word + "@" + str(i) + "\n")
 
 parser = argparse.ArgumentParser(prog='pass.py',
                                  usage='%(prog)s words [OPTIONS]',
